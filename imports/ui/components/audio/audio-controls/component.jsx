@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
-import Button from '@material-ui/core/Button';
+import Button from '/imports/ui/components/button/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import MutedAlert from '/imports/ui/components/muted-alert/component';
@@ -103,7 +103,6 @@ class AudioControls extends PureComponent {
         {muted ? <MutedAlert {...{ inputStream, isViewer, isPresenter }} /> : null}
         {showMute && isVoiceUser ? toggleMuteBtn : null}
         <Button
-          variant="contained"
           className={cx(inAudio || styles.btn)}
           onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
           disabled={disable}
@@ -112,13 +111,13 @@ class AudioControls extends PureComponent {
             : intl.formatMessage(intlMessages.joinAudio)}
           label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
             : intl.formatMessage(intlMessages.joinAudio)}
-          color={inAudio ? 'primary' : 'secondary'}
+          color={inAudio ? 'primary' : 'default'}
           ghost={!inAudio}
           icon={joinIcon}
-          size="small" 
+          size="lg"
           circle
           accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
-          >অডিও</Button>
+        />
       </span>
     );
   }
