@@ -171,13 +171,12 @@ const DesktopShare = ({
 
   return shouldAllowScreensharing
     ? (
-      <Button variant="outlined" size="small" color="primary" 
-        className={cx(isVideoBroadcasting || styles.btn)}
+      <Button variant="contained" size="small"  
         disabled={(!isMeteorConnected && !isVideoBroadcasting) || !screenshareDataSavingSetting}
         icon={isVideoBroadcasting ? 'desktop' : 'desktop_off'}
         label={intl.formatMessage(vLabel)}
         description={intl.formatMessage(vDescr)}
-        color={isVideoBroadcasting ? 'primary' : 'default'}
+        color={isVideoBroadcasting ? 'primary' : 'secondary'}
         ghost={!isVideoBroadcasting}
         hideLabel
         onClick={isVideoBroadcasting ? handleUnshareScreen : () => {
