@@ -202,7 +202,7 @@ const DesktopShare = ({
         }
         }
         id={isVideoBroadcasting ? 'unshare-screen-button' : 'share-screen-button'}
-      >Video
+      >্ক্রীন
         </Button>
     ) : null;
 };
