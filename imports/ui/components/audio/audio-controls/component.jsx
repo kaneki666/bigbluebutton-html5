@@ -118,7 +118,7 @@ class AudioControls extends PureComponent {
           size="lg"
           circle
           accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
-          >ভিডিও</Button>
+        />
       </span>
     );
   }
