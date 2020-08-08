@@ -96,8 +96,8 @@ class AudioControls extends PureComponent {
             />
           ) : null}
         <Button
-          variant="outlined" size="small"
-          className={cx(styles.button, inAudio || styles.btn)}
+          variant="contained" size="small" color="primary"
+
           onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
           disabled={disable}
           hideLabel
@@ -105,10 +105,11 @@ class AudioControls extends PureComponent {
             : intl.formatMessage(intlMessages.joinAudio)}
           label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
             : intl.formatMessage(intlMessages.joinAudio)}
-          color={inAudio ? 'primary' : 'secondary'}
+          
           ghost={!inAudio}
+       
           accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
-          >ভিডিও</Button>
+          >অডিও</Button>
       </span>);
   }
 }
