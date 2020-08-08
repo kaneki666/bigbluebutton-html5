@@ -2,10 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
-import Button from '/imports/ui/components/button/component';
+import Button from '@material-ui/core/Button';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
-import MutedAlert from '/imports/ui/components/muted-alert/component';
 import { styles } from './styles';
 
 const intlMessages = defineMessages({
@@ -64,9 +63,6 @@ class AudioControls extends PureComponent {
       intl,
       shortcuts,
       isVoiceUser,
-      inputStream,
-      isViewer,
-      isPresenter,
     } = this.props;
 
     let joinIcon = 'audio_off';
@@ -78,32 +74,30 @@ class AudioControls extends PureComponent {
       }
     }
 
-    const label = muted ? intl.formatMessage(intlMessages.unmuteAudio)
-      : intl.formatMessage(intlMessages.muteAudio);
-
-    const toggleMuteBtn = (
-      <Button
-        className={cx(styles.muteToggle, !talking || styles.glow, !muted || styles.btn)}
-        onClick={handleToggleMuteMicrophone}
-        disabled={disable}
-        hideLabel
-        label={label}
-        aria-label={label}
-        color={!muted ? 'primary' : 'default'}
-        ghost={muted}
-        icon={muted ? 'mute' : 'unmute'}
-        size="lg"
-        circle
-        accessKey={shortcuts.togglemute}
-      />
-    );
-
     return (
       <span className={styles.container}>
-        {muted ? <MutedAlert {...{ inputStream, isViewer, isPresenter }} /> : null}
-        {showMute && isVoiceUser ? toggleMuteBtn : null}
+        {showMute && isVoiceUser
+          ? (
+            <Button
+              className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
+              onClick={handleToggleMuteMicrophone}
+              disabled={disable}
+              hideLabel
+              label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                : intl.formatMessage(intlMessages.muteAudio)}
+              aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
+                : intl.formatMessage(intlMessages.muteAudio)}
+              color={!muted ? 'primary' : 'default'}
+              ghost={muted}
+              icon={muted ? 'mute' : 'unmute'}
+              size="lg"
+              circle
+              accessKey={shortcuts.togglemute}
+            />
+          ) : null}
         <Button
-          className={cx(inAudio || styles.btn)}
+          variant="outlined" size="small"
+          className={cx(styles.button, inAudio || styles.btn)}
           onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
           disabled={disable}
           hideLabel
@@ -111,15 +105,11 @@ class AudioControls extends PureComponent {
             : intl.formatMessage(intlMessages.joinAudio)}
           label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
             : intl.formatMessage(intlMessages.joinAudio)}
-          color={inAudio ? 'primary' : 'default'}
+          color={inAudio ? 'primary' : 'secondary'}
           ghost={!inAudio}
-          icon={joinIcon}
-          size="lg"
-          circle
           accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
-        />
-      </span>
-    );
+          >ভিডিও</Button>
+      </span>);
   }
 }
 
