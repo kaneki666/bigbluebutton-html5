@@ -171,8 +171,7 @@ const DesktopShare = ({
 
   return shouldAllowScreensharing
     ? (
-      <Button variant="outlined" size="small" color="primary" className={classes.margin}>
-          
+      <Button variant="outlined" size="small" color="primary" 
         className={cx(isVideoBroadcasting || styles.btn)}
         disabled={(!isMeteorConnected && !isVideoBroadcasting) || !screenshareDataSavingSetting}
         icon={isVideoBroadcasting ? 'desktop' : 'desktop_off'}
@@ -181,8 +180,6 @@ const DesktopShare = ({
         color={isVideoBroadcasting ? 'primary' : 'default'}
         ghost={!isVideoBroadcasting}
         hideLabel
-        circle
-        size="lg"
         onClick={isVideoBroadcasting ? handleUnshareScreen : () => {
           if (IS_SAFARI && !ScreenshareBridgeService.hasDisplayMedia) {
             return mountModal(<Modal
