@@ -1,28 +1,32 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { defineMessages, intlShape, injectIntl } from 'react-intl';
-import Button from '@material-ui/core/Button';
-import getFromUserSettings from '/imports/ui/services/users-settings';
-import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
-import { styles } from './styles';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import cx from "classnames";
+import ReactTooltip from "react-tooltip";
+import { defineMessages, intlShape, injectIntl } from "react-intl";
+import IconButton from "@material-ui/core/IconButton";
+import { IconContext } from "react-icons";
+import { AiTwotoneAudio } from "react-icons/ai";
+import { FiHeadphones } from "react-icons/fi";
+import getFromUserSettings from "/imports/ui/services/users-settings";
+import withShortcutHelper from "/imports/ui/components/shortcut-help/service";
+import { styles } from "./styles";
 
 const intlMessages = defineMessages({
   joinAudio: {
-    id: 'app.audio.joinAudio',
-    description: 'Join audio button label',
+    id: "app.audio.joinAudio",
+    description: "Join audio IconButton label",
   },
   leaveAudio: {
-    id: 'app.audio.leaveAudio',
-    description: 'Leave audio button label',
+    id: "app.audio.leaveAudio",
+    description: "Leave audio IconButton label",
   },
   muteAudio: {
-    id: 'app.actionsBar.muteLabel',
-    description: 'Mute audio button label',
+    id: "app.actionsBar.muteLabel",
+    description: "Mute audio IconButton label",
   },
   unmuteAudio: {
-    id: 'app.actionsBar.unmuteLabel',
-    description: 'Unmute audio button label',
+    id: "app.actionsBar.unmuteLabel",
+    description: "Unmute audio IconButton label",
   },
 });
 
@@ -43,9 +47,11 @@ const propTypes = {
 class AudioControls extends PureComponent {
   componentDidMount() {
     const { processToggleMuteFromOutside } = this.props;
-    if (Meteor.settings.public.allowOutsideCommands.toggleSelfVoice
-      || getFromUserSettings('bbb_outside_toggle_self_voice', false)) {
-      window.addEventListener('message', processToggleMuteFromOutside);
+    if (
+      Meteor.settings.public.allowOutsideCommands.toggleSelfVoice ||
+      getFromUserSettings("bbb_outside_toggle_self_voice", false)
+    ) {
+      window.addEventListener("message", processToggleMuteFromOutside);
     }
   }
 
@@ -65,55 +71,69 @@ class AudioControls extends PureComponent {
       isVoiceUser,
     } = this.props;
 
-    let joinIcon = 'audio_off';
+    let joinIcon = "audio_off";
     if (inAudio) {
       if (listenOnly) {
-        joinIcon = 'listen';
+        joinIcon = "listen";
       } else {
-        joinIcon = 'audio_on';
+        joinIcon = "audio_on";
       }
     }
 
     return (
       <span className={styles.container}>
-        {showMute && isVoiceUser
-          ? (
-            <Button
-              className={cx(styles.button, !talking || styles.glow, !muted || styles.btn)}
-              onClick={handleToggleMuteMicrophone}
-              disabled={disable}
-              hideLabel
-              label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
-                : intl.formatMessage(intlMessages.muteAudio)}
-              aria-label={muted ? intl.formatMessage(intlMessages.unmuteAudio)
-                : intl.formatMessage(intlMessages.muteAudio)}
-              color={!muted ? 'primary' : 'default'}
-              ghost={muted}
-              icon={muted ? 'mute' : 'unmute'}
-              size="lg"
-              circle
-              accessKey={shortcuts.togglemute}
-            />
-          ) : null}
-        <Button
-          variant="contained" size="small" color="primary"
+        {showMute && isVoiceUser ? (
+          <IconButton
+            onClick={handleToggleMuteMicrophone}
+            data-tip
+            data-for="mute"
+          >
+            <IconContext.Provider
+              value={{
+                color: "white",
+                size: "1.5em",
+                className: "global-class-name",
+              }}
+            >
+              <div>
+                <AiTwotoneAudio />
+              </div>
+            </IconContext.Provider>
 
+            <ReactTooltip id="mute">
+              <span>মিউট অথবা আনমিউট</span>
+            </ReactTooltip>
+          </IconButton>
+        ) : null}
+        <IconButton
           onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
-          disabled={disable}
-          hideLabel
-          aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-            : intl.formatMessage(intlMessages.joinAudio)}
-          label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-            : intl.formatMessage(intlMessages.joinAudio)}
-          
-          ghost={!inAudio}
-       
-          accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
-          >অডিও</Button>
-      </span>);
+          data-tip
+          data-for="joinaundio"
+        >
+          <IconContext.Provider
+            value={{
+              color: "white",
+              size: "1.5em",
+              className: "global-class-name",
+            }}
+          >
+            <div>
+              <FiHeadphones />
+            </div>
+          </IconContext.Provider>
+          <ReactTooltip id="joinaundio">
+            <span>অডিও ওপেন</span>
+          </ReactTooltip>
+        </IconButton>
+      </span>
+    );
   }
 }
 
 AudioControls.propTypes = propTypes;
 
-export default withShortcutHelper(injectIntl(AudioControls), ['joinAudio', 'leaveAudio', 'toggleMute']);
+export default withShortcutHelper(injectIntl(AudioControls), [
+  "joinAudio",
+  "leaveAudio",
+  "toggleMute",
+]);
