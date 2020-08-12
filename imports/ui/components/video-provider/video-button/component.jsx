@@ -1,32 +1,34 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import Button from '@material-ui/core/Button'
-import VideoService from '../service';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
-import { styles } from './styles';
-import { validIOSVersion } from '/imports/ui/components/app/service';
+import React, { memo } from "react";
+import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import { IconContext } from "react-icons";
+import { AiFillVideoCamera } from "react-icons/ai";
+import VideoService from "../service";
+import { defineMessages, injectIntl, intlShape } from "react-intl";
+import { styles } from "./styles";
+import { validIOSVersion } from "/imports/ui/components/app/service";
 
 const intlMessages = defineMessages({
   joinVideo: {
-    id: 'app.video.joinVideo',
-    description: 'Join video button label',
+    id: "app.video.joinVideo",
+    description: "Join video button label",
   },
   leaveVideo: {
-    id: 'app.video.leaveVideo',
-    description: 'Leave video button label',
+    id: "app.video.leaveVideo",
+    description: "Leave video button label",
   },
   videoButtonDesc: {
-    id: 'app.video.videoButtonDesc',
-    description: 'video button description',
+    id: "app.video.videoButtonDesc",
+    description: "video button description",
   },
   videoLocked: {
-    id: 'app.video.videoLocked',
-    description: 'video disabled label',
+    id: "app.video.videoLocked",
+    description: "video disabled label",
   },
   iOSWarning: {
-    id: 'app.iOSWarning.label',
-    description: 'message indicating to upgrade ios version',
+    id: "app.iOSWarning.label",
+    description: "message indicating to upgrade ios version",
   },
 });
 
@@ -43,7 +45,8 @@ const JoinVideoButton = ({
   isDisabled,
   mountVideoPreview,
 }) => {
-  const exitVideo = () => hasVideoStream && !VideoService.isMultipleCamerasEnabled();
+  const exitVideo = () =>
+    hasVideoStream && !VideoService.isMultipleCamerasEnabled();
 
   const handleOnClick = () => {
     if (!validIOSVersion()) {
@@ -57,23 +60,32 @@ const JoinVideoButton = ({
     }
   };
 
-  const label = exitVideo() ?
-    intl.formatMessage(intlMessages.leaveVideo) :
-    intl.formatMessage(intlMessages.joinVideo);
+  const label = exitVideo()
+    ? intl.formatMessage(intlMessages.leaveVideo)
+    : intl.formatMessage(intlMessages.joinVideo);
 
   return (
-    <Button
-      label={isDisabled ? intl.formatMessage(intlMessages.videoLocked) : label}
-     
+    <IconButton
+      data-test="joinVideo"
       onClick={handleOnClick}
-      hideLabel
-      aria-label={intl.formatMessage(intlMessages.videoButtonDesc)}
-      
-      icon={hasVideoStream ? 'video' : 'video_off'}
-      ghost={!hasVideoStream}
-      variant="contained" size="small" color="primary"
-      disabled={isDisabled}
-    >ভিডিও</Button>
+      data-tip
+      data-for="sharewebcam"
+    >
+      <IconContext.Provider
+        value={{
+          color: "white",
+          size: "1.5em",
+          className: "global-class-name",
+        }}
+      >
+        <div>
+          <AiFillVideoCamera />
+        </div>
+      </IconContext.Provider>
+      <ReactTooltip id="sharewebcam">
+        <span>শেয়ার ভিডিও</span>
+      </ReactTooltip>
+    </IconButton>
   );
 };
 
