@@ -8,9 +8,7 @@ import DropdownTrigger from "/imports/ui/components/dropdown/trigger/component";
 import DropdownContent from "/imports/ui/components/dropdown/content/component";
 import DropdownList from "/imports/ui/components/dropdown/list/component";
 import DropdownListItem from "/imports/ui/components/dropdown/list/item/component";
-import IconButton from "@material-ui/core/IconButton";
-import { IconContext } from "react-icons";
-import { FcMenu } from "react-icons/fc";
+import Button from "/imports/ui/components/button/component";
 
 import ChatService from "../service";
 
@@ -138,29 +136,18 @@ class ChatDropdown extends PureComponent {
         onHide={this.onActionsHide}
       >
         <DropdownTrigger tabIndex={0}>
-          <IconButton
+          <Button
             data-test="chatDropdownTrigger"
+            icon="more"
+            size="sm"
+            ghost
+            circle
+            hideLabel
+            color="dark"
             label={intl.formatMessage(intlMessages.options)}
-            data-tip
-            data-for="chat-dropdown"
+            aria-label={intl.formatMessage(intlMessages.options)}
             onClick={() => null}
-          >
-            <IconContext.Provider
-              value={{
-                color: "white",
-                size: "1.5em",
-                className: "global-class-name",
-              }}
-            >
-              <div>
-                <FcMenu />
-              </div>
-            </IconContext.Provider>
-
-            <ReactTooltip id="chat-dropdown">
-              <span>{intl.formatMessage(intlMessages.options)}</span>
-            </ReactTooltip>
-          </IconButton>
+          />
         </DropdownTrigger>
         <DropdownContent placement="bottom right">
           <DropdownList>{availableActions}</DropdownList>
