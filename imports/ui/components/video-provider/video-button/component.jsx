@@ -2,9 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import ReactTooltip from "react-tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import { IconContext } from "react-icons";
-import { AiFillVideoCamera } from "react-icons/ai";
+import Button from "@material-ui/core/Button";
 import VideoService from "../service";
 import { defineMessages, injectIntl, intlShape } from "react-intl";
 import { styles } from "./styles";
@@ -66,28 +64,21 @@ const JoinVideoButton = ({
     : intl.formatMessage(intlMessages.joinVideo);
 
   return (
-    <IconButton
+    <Button
+      size="small"
+      variant="contained"
+      color="primary"
       data-tip
       data-for="sharewebcam"
       className={cx(styles.button, hasVideoStream || styles.btn)}
       onClick={handleOnClick}
       disabled={isDisabled}
     >
-      <IconContext.Provider
-        value={{
-          color: "white",
-          size: "1.5em",
-          className: "global-class-name",
-        }}
-      >
-        <div>
-          <AiFillVideoCamera />
-        </div>
-      </IconContext.Provider>
+     Video
       <ReactTooltip id="sharewebcam">
         <span>শেয়ার ভিডিও</span>
       </ReactTooltip>
-    </IconButton>
+    </Button>
   );
 };
 
