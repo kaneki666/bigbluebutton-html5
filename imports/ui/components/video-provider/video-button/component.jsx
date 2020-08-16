@@ -64,10 +64,7 @@ const JoinVideoButton = ({
     : intl.formatMessage(intlMessages.joinVideo);
 
   return (
-    <Button
-      size="small"
-      variant="contained"
-      color="primary"
+   <Button variant="contained" size="small" color="primary"
       data-tip
       data-for="sharewebcam"
       onClick={handleOnClick}
