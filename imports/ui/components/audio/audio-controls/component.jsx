@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import ReactTooltip from "react-tooltip";
 import { defineMessages, intlShape, injectIntl } from "react-intl";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import { IconContext } from "react-icons";
 import { AiTwotoneAudio } from "react-icons/ai";
 import { FiHeadphones } from "react-icons/fi";
