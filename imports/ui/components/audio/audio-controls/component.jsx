@@ -83,29 +83,20 @@ class AudioControls extends PureComponent {
     return (
       <span className={styles.container}>
         {showMute && isVoiceUser ? (
-          <IconButton
+          <Button
+            variant="contained"
+            color="primary"
             onClick={handleToggleMuteMicrophone}
             data-tip
             data-for="mute"
           >
-            <IconContext.Provider
-              value={{
-                color: "white",
-                size: "1.5em",
-                className: "global-class-name",
-              }}
-            >
-              <div>
-                <AiTwotoneAudio />
-              </div>
-            </IconContext.Provider>
-
+            Microphone
             <ReactTooltip id="mute">
               <span>মিউট অথবা আনমিউট</span>
             </ReactTooltip>
-          </IconButton>
+          </Button>
         ) : null}
-        <IconButton
+        {/* <IconButton
           onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
           data-tip
           data-for="joinaundio"
@@ -124,7 +115,7 @@ class AudioControls extends PureComponent {
           <ReactTooltip id="joinaundio">
             <span>অডিও ওপেন</span>
           </ReactTooltip>
-        </IconButton>
+        </IconButton> */}
       </span>
     );
   }
