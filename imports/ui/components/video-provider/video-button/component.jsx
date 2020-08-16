@@ -70,7 +70,6 @@ const JoinVideoButton = ({
       color="primary"
       data-tip
       data-for="sharewebcam"
-      className={cx(styles.button, hasVideoStream || styles.btn)}
       onClick={handleOnClick}
       disabled={isDisabled}
     >
