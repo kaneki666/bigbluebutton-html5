@@ -84,6 +84,7 @@ class AudioControls extends PureComponent {
       <span className={styles.container}>
         {showMute && isVoiceUser ? (
           <Button
+            size="small"
             variant="contained"
             color="primary"
             onClick={handleToggleMuteMicrophone}
