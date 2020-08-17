@@ -90,27 +90,6 @@ class ActionsBar extends PureComponent {
               screenshareDataSavingSetting,
             }}
           />
-
-          <IconButton
-            onClick={() => mountModal(<EndMeetingConfirmationContainer />)}
-            data-tip
-            data-for="sharewebcam"
-          >
-            <IconContext.Provider
-              value={{
-                color: "white",
-                size: "1.5em",
-                className: "global-class-name",
-              }}
-            >
-              <div>
-                <FcEndCall />
-              </div>
-            </IconContext.Provider>
-            <ReactTooltip id="leavemeeting">
-              <span>Leave Meeting</span>
-            </ReactTooltip>
-          </IconButton>
         </div>
         <div className={styles.right}>
           {isLayoutSwapped ? (
