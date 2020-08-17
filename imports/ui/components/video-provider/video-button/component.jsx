@@ -70,9 +70,9 @@ const JoinVideoButton = ({
       onClick={handleOnClick}
       disabled={isDisabled}
     >
-     Video
+    Camera
       <ReactTooltip id="sharewebcam">
-        <span>শেয়ার ভিডিও</span>
+        <span>Camera On | Off</span>
       </ReactTooltip>
     </Button>
   );
