@@ -91,32 +91,13 @@ class AudioControls extends PureComponent {
             data-tip
             data-for="mute"
           >
-            Microphone
+           Sound
             <ReactTooltip id="mute">
-              <span>মিউট অথবা আনমিউট</span>
+              <span>Sound On| Off</span>
             </ReactTooltip>
           </Button>
         ) : null}
-        {/* <IconButton
-          onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
-          data-tip
-          data-for="joinaundio"
-        >
-          <IconContext.Provider
-            value={{
-              color: "white",
-              size: "1.5em",
-              className: "global-class-name",
-            }}
-          >
-            <div>
-              <FiHeadphones />
-            </div>
-          </IconContext.Provider>
-          <ReactTooltip id="joinaundio">
-            <span>অডিও ওপেন</span>
-          </ReactTooltip>
-        </IconButton> */}
+       
       </span>
     );
   }
