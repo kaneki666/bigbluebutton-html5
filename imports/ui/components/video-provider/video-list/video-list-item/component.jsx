@@ -204,6 +204,7 @@ class VideoListItem extends Component {
           && <div className={styles.connecting} />
         }
         <div
+          style={{paddingBottom:'20px'}}
           className={styles.videoContainer}
           ref={(ref) => { this.videoContainer = ref; }}
         >
